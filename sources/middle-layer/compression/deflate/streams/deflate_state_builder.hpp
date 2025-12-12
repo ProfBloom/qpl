@@ -354,6 +354,14 @@ deflate_state_builder<execution_path_t::hardware>::multidescriptor_status(const 
     return *this;
 }
 
+inline auto deflate_state_builder<execution_path_t::hardware>::cache_control(bool value) noexcept -> common_type& {
+    state_.cache_control_ = value;
+
+    hw_iaa_descriptor_hint_cpu_cache_as_destination(state_.compress_descriptor_, value);
+
+    return *this;
+}
+
 [[nodiscard]] inline auto deflate_state_builder<execution_path_t::hardware>::build() noexcept -> state_type {
     if (!state_.collect_statistic_descriptor_ && !state_.huffman_table_) {
         hw_iaa_aecs_compress* actual_aecs = hw_iaa_aecs_compress_get_aecs_ptr(

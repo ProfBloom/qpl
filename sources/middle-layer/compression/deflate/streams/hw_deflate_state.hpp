@@ -74,6 +74,7 @@ private:
     HW_PATH_VOLATILE hw_completion_record* completion_record_            = nullptr;
     qpl_compression_huffman_table*         huffman_table_                = nullptr;
     qpl_dictionary*                        dictionary_                   = nullptr;
+    bool                                   cache_control_                = false;
     bool                                   start_new_block               = false;
     util::multitask_status                 processing_step               = util::multitask_status::ready;
     hw_multidescriptor_status              multi_desc_status =
