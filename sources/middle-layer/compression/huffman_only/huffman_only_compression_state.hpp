@@ -76,6 +76,7 @@ private:
     uint8_t*                   source_begin_ptr_  = nullptr;
     endianness_t               endianness_        = little_endian;
     uint32_t                   crc_seed_          = 0U;
+    bool                       cache_control_     = false;
     bool                       collect_statistic_ = false;
     compression_mode_t         compression_mode_  = fixed_mode;
     uint8_t                    last_bits_offset_  = 0U;

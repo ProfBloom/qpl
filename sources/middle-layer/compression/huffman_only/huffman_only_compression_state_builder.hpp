@@ -172,8 +172,6 @@ inline auto huffman_only_compression_state_builder<execution_path_t::software>::
         -> huffman_only_compression_state_builder& {
     stream_.cache_control_ = value;
 
-    hw_iaa_descriptor_hint_cpu_cache_as_destination(state_.compress_descriptor_, value);
-
     return *this;
 }
 
@@ -265,9 +263,7 @@ inline auto huffman_only_compression_state_builder<execution_path_t::hardware>::
 
 inline auto huffman_only_compression_state_builder<execution_path_t::hardware>::cache_control(bool value) noexcept
         -> huffman_only_compression_state_builder& {
-    stream_.cache_control_ = value;
-
-    descriptor_hint_cpu_cache_as_destination(stream_.descriptor_compress_, value);
+    hw_iaa_descriptor_hint_cpu_cache_as_destination(stream_.descriptor_compress_, value);
 
     return *this;
 }

@@ -112,7 +112,8 @@ public:
     auto dictionary(qpl_dictionary& dictionary) noexcept -> common_type&;
 
     auto verify(bool value) noexcept -> common_type& {
-        stream_.is_verification_enabled_ = value;
+        // Cache control is only applicable for hardware path
+        (void)value;  // Suppress unused parameter warning
 
         return *reinterpret_cast<common_type*>(this);
     }
