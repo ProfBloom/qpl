@@ -203,6 +203,13 @@ extern "C" {
 */
 #define QPL_FLAG_FORCE_ARRAY_OUTPUT 0x00800000U
 
+/* Custom Flags */
+/**
+ * Cache control flag to control writing to cache or memory directly
+ * @note flag set means writing to cache, flag not set means writing directly to memory
+ */
+#define QPL_FLAG_CACHE_CONTROL 0x01000000U
+
 /* NUMA support flags */
 
 /**

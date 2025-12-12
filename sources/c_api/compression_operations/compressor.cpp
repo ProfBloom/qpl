@@ -72,7 +72,8 @@ uint32_t perform_compression(qpl_job* const job_ptr) noexcept {
                 .collect_statistics_step(job_ptr->flags & QPL_FLAG_DYNAMIC_HUFFMAN)
                 .crc_seed(job_ptr->crc)
                 .verify(!(job_ptr->flags & QPL_FLAG_OMIT_VERIFY))
-                .total_out(job_ptr->total_out);
+                .total_out(job_ptr->total_out)
+                .cache_control(job_ptr->flags & QPL_FLAG_CACHE_CONTROL);
 
         if (qpl::ml::execution_path_t::hardware == path) {
             builder.set_is_gen1_hw(!qpl::ml::util::are_iaa_gen_2_min_capabilities_present());
@@ -141,7 +142,8 @@ uint32_t perform_compression(qpl_job* const job_ptr) noexcept {
                 .crc_seed({job_ptr->crc, 1})
                 .terminate(job_ptr->flags & QPL_FLAG_LAST)
                 .verify(!(job_ptr->flags & QPL_FLAG_OMIT_VERIFY))
-                .load_current_position(job_ptr->total_out); // Shall be deprecated
+                .load_current_position(job_ptr->total_out)
+                .cache_control(job_ptr->flags & QPL_FLAG_CACHE_CONTROL); // Shall be deprecated
 
         if (job_ptr->flags & QPL_FLAG_DYNAMIC_HUFFMAN) {
             builder.collect_statistics_step(true);

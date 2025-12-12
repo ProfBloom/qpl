@@ -50,6 +50,8 @@ public:
 
     inline auto build() noexcept -> huffman_only_state<execution_path_t::software>;
 
+    inline auto cache_control(bool value) noexcept -> huffman_only_compression_state_builder&;
+
 private:
     huffman_only_state<execution_path_t::software> stream_;
     const qpl::ml::util::linear_allocator& allocator_; //NOLINT(cppcoreguidelines-avoid-const-or-ref-data-members)
@@ -87,6 +89,8 @@ public:
     inline auto set_is_gen1_hw(bool value) noexcept -> huffman_only_compression_state_builder&;
 
     inline auto build() noexcept -> huffman_only_state<execution_path_t::hardware>;
+
+    inline auto cache_control(bool value) noexcept -> huffman_only_compression_state_builder&;
 
 private:
     huffman_only_state<execution_path_t::hardware> stream_;
@@ -162,6 +166,13 @@ inline auto huffman_only_compression_state_builder<execution_path_t::software>::
 inline auto huffman_only_compression_state_builder<execution_path_t::software>::build() noexcept
         -> huffman_only_state<execution_path_t::software> {
     return stream_;
+}
+
+inline auto huffman_only_compression_state_builder<execution_path_t::software>::cache_control(bool value) noexcept
+        -> huffman_only_compression_state_builder& {
+    stream_.cache_control_ = value;
+
+    return *this;
 }
 
 // ------ Hardware ------ //
@@ -248,6 +259,13 @@ inline auto huffman_only_compression_state_builder<execution_path_t::hardware>::
     }
 
     return stream_;
+}
+
+inline auto huffman_only_compression_state_builder<execution_path_t::hardware>::cache_control(bool value) noexcept
+        -> huffman_only_compression_state_builder& {
+    stream_.cache_control_ = value;
+
+    return *this;
 }
 
 } // namespace qpl::ml::compression

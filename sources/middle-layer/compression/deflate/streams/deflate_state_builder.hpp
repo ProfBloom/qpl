@@ -117,6 +117,12 @@ public:
         return *reinterpret_cast<common_type*>(this);
     }
 
+    auto cache_control(bool value) noexcept -> common_type& {
+        stream_.cache_control_ = value;
+
+        return *reinterpret_cast<common_type*>(this);
+    }
+
 protected:
     auto set_isal_internal_buffers(uint8_t* const level_buffer_ptr, const uint32_t level_buffer_size,
                                    isal_hufftables* const huffman_tables_ptr, BitBuf2* const bit_buffer_ptr) noexcept
@@ -220,6 +226,8 @@ public:
     inline auto verify(bool value) noexcept -> common_type&;
 
     inline auto multidescriptor_status(const qpl_job* const job_ptr) noexcept -> common_type&;
+
+    inline auto cache_control(bool value) noexcept -> common_type&;
 
 private:
     state_type                             state_;
